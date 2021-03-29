@@ -1,31 +1,20 @@
   
-import {SETURL} from "./const";
+import {DISPATCHURL, GETDATA} from "./const";
 const initialState = {
-    url: ''
+    url: '',
+    data: []
 };
 
 export function rootReducer(state = initialState, action){
     switch (action.type) {
-        case SETURL :
+        case DISPATCHURL :
             return {...state,
                 url: action.url,
                 };
-        // case LOGOUT :
-        //     return {...state,
-        //         authStatus: false
-        //         };
-        // case RELOAD:
-        //     return {...state,
-        //         initialization: false
-        //         };
-        // case TRAFFIC:
-        //     return {...state,
-        //         traffic: action.traffic
-        //         };
-        // case CREATEPROXY:
-        //     return {...state,
-        //         traffic: action.traffic
-        //         };
+        case GETDATA :
+            return {...state,
+                data: action.data,
+                };
         default: return state;
     }
 }

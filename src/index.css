@@ -11,3 +11,46 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+/*
+.chartController {
+  border: 1px solid black;
+}
+*/
+.submitButton {
+  background-color: greenyellow;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+.submitButton:hover {
+  background-color: #4CAF50; /* Green */
+    color: white;
+}
+.group > * {
+  opacity: 0%;
+}
+.dots {
+  fill:black;
+}
+.verticalLines {
+  stroke: black;
+}
+.verticalPolygon {
+  fill:black;
+}
+.promptPolygon {
+  fill:black;
+}
+
+.textPrompt {
+fill:white;
+}
+
+.group:hover *:not(.verticalPolygon){
+  opacity: 80%;
+}
+
+.zeroAxis {
+  stroke-dasharray: 10 10;
+  stroke: black;
+  stroke-width: 1px;
+}

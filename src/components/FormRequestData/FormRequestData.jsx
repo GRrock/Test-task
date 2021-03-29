@@ -1,19 +1,19 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
+import {dispatchURL} from '../../modules/actions'
 
-const FormRequestData = () => {
+const FormRequestData = (props) => {
     const [url, setUrl] = useState('');
     const handlerSubmit = event => {
-        console.log(url)
+      event.preventDefault()
+      props.dispatchURL(url);
     }
 
     return (
       <form onSubmit={handlerSubmit} className="formRequestData">   
       <input type='text' value={url} onChange={(event) =>{setUrl(event.target.value)}}/>
-      <button onClick={handlerSubmit} value='Обновить данные'/>   
+      <button className ='submitButton' onClick={handlerSubmit}> Обновить данные </button> 
       </form>
     );
   }
-export default connect(state => ({
-    state: state 
-}), {}) (FormRequestData)
+export default connect(state =>  state, {dispatchURL}) (FormRequestData)

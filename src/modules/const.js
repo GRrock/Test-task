@@ -1,1 +1,2 @@
-export const SETURL = 'FORM/SETURL';
+export const DISPATCHURL = 'FORM/DISPATCHURL';
+export const GETDATA = 'GETDATA';
