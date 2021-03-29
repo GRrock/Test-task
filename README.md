@@ -23,9 +23,6 @@ server nodejs - в качестве сервера
 
 Запустите команду  npm install
 
-Запустите команду  npm install
-
-
 ### Для запуска development mode
 Откройте  bash 
 Перейдите в директорию cd ./test-task/server-nodejs
@@ -36,17 +33,9 @@ server nodejs - в качестве сервера
 Перейдите в директорию cd ./test-task
 и запустите команду  npm start
 
-Введите в текстовое поли данный url
- http://static.anychart.com/cdn/anydata/common/11.json
-
-и запустите команду  node server.js
-
-Откройте второй bash 
-Перейдите в директорию cd ./test-task
-и запустите команду  npm start
-
-Введите в текстовое поли данный url
- http://static.anychart.com/cdn/anydata/common/11.json
+Страница откроется автоматически
+Введите в текстовое поле данный url
+http://static.anychart.com/cdn/anydata/common/11.json
 
 ### Для запуска build
 Откройте bash 
@@ -57,13 +46,8 @@ server nodejs - в качестве сервера
 Откройте второй bash 
 Перейдите в директорию cd ./test-task и запустите команду  npm run-script build
 
-и запустите команду  node server.js
-
-Откройте второй bash 
-Перейдите в директорию cd ./test-task и запустите команду  npm run-script build
-
 Запустите команду serve -s build  (если у вас не установлен пакет serve, запустите sudo npm install -g serve)
 
 Откройте http://localhost:5000  
 Введите в текстовое поли данный url
- http://static.anychart.com/cdn/anydata/common/11.json
+http://static.anychart.com/cdn/anydata/common/11.json
