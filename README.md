@@ -64,15 +64,21 @@ http://static.anychart.com/cdn/anydata/common/11.json
 Сервер принимает GET запросы с параметром url после знака '?'
 пример: http://localhost:7000?url=http://static.anychart.com/cdn/anydata/common/11.json
 после чего делает запрос на указанный url и JSON следующего вида:
+
 {
 	...
 	data: [
+
 		{ x: string, value: number },
+
 		{ x: string, value: number },
+
 		{ x: string, value: number },
+        
 		... 
 	]
 	...
 }
+
 Перед отправкой убедитесь, что данные соответствуют указанному выше формату.
 Иначе могут возникнуть непредвиденные ошибки.
