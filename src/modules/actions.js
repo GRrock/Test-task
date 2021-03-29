@@ -9,7 +9,7 @@ export const dispatchURL = (url) => ({
 export const getData = (url) => {
   return async function (dispatch) {
     try {
-      let response = await fetch('http://localhost:5000?url=' + url);
+      let response = await fetch('http://localhost:7000?url=' + url);
       if (response.ok) {
         response = await response.json()
         dispatch({

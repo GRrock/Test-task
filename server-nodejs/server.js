@@ -52,7 +52,7 @@ http.createServer((request, response) => {
             })
 
             req.end();
-            
+
         } catch (error) {
             response.writeHead(400, header);
             response.end(JSON.stringify(error));
@@ -62,4 +62,4 @@ http.createServer((request, response) => {
         response.writeHead(200, header);
         response.end();
     }
-}).listen(5000, () => console.log('сервер запущен'))
+}).listen(7000, () => console.log('сервер запущен'))
