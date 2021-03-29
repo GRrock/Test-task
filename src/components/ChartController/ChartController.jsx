@@ -1,8 +1,8 @@
 import React from 'react';
 
 const ChartController = (props) => {
+  
   if (props.points.hasOwnProperty('pointsOfgrafik')) {
-
     let circle = props.points.dots.map(element => {
       return <circle className="dots" key={element[0] + element[1]} cx={element[0]} cy={element[1]} r="4" strokeWidth="1" />
     })
@@ -21,12 +21,15 @@ const ChartController = (props) => {
       </>
       )
     })
-
     return (
-      <div>
+      <div className = 'container'>
         <svg className="chartController" width="700" height="375px" style={{ marginLeft: "30px" }}>
           <polyline className="grafik" points={props.points.pointsOfgrafik} fill="none" stroke="black" />
-
+          {props.points.zeroAxis !== 'none' ?
+          <polyline className="zeroAxis" points={props.points.zeroAxis} fill="none" stroke="black" />
+          :
+          <></>
+          }
           {circle.map((element, index) => {
             return (
               <g key={index} className="group">
@@ -38,7 +41,6 @@ const ChartController = (props) => {
             )
           })
           }
-
           <path d={props.points.descriptionLines.pointsOfAxisY} fill="none" stroke="black" />
           {props.points.descriptionLines.pointsOfLegendY.map((element, index) => {
             return (
@@ -50,7 +52,6 @@ const ChartController = (props) => {
             )
           })
           }
-
           <path d={props.points.descriptionLines.pointsOfAxisX} fill="none" stroke="black" />
           {props.points.descriptionLines.pointsOfLegendX.map((element, index) => {
             return (
@@ -62,7 +63,6 @@ const ChartController = (props) => {
             )
           })
           }
-
           <line />
         </svg>
       </div>

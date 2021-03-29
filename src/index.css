@@ -6,24 +6,41 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.App {
+  display: flex;
+  flex-direction: column;
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-/*
-.chartController {
-  border: 1px solid black;
+.container {
+  margin-top: 50px;
+  display:  flex;
+  justify-content: center;
 }
-*/
+.formRequestData {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.urlInput {
+  min-width: 400px;
+}
 .submitButton {
-  background-color: greenyellow;
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition-duration: 0.4s;
+  margin-top: 20px;
+  height: 2rem;
+  width: fit-content;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 20px;
+  border: none;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 .submitButton:hover {
-  background-color: #4CAF50; /* Green */
-    color: white;
+  background-color: #3f8d42;
+  color: white;
 }
 .group > * {
   opacity: 0%;

@@ -16,17 +16,20 @@ const DataController = (props) => {
     setRendering(false);
     if (props.url !== url) {
       setUrl(props.url)
-    } else if (props.url === url && url !== '') {
+    } else if (props.url === url && url !== ''  && props.error !== true) {
       getDataFn(url)
       interval = setInterval(() => {
         getDataFn(url)
       }, 60000)
     }
+    if(props.error === true){
+      clearInterval(interval)
+    }
     return () => {
       clearInterval(interval)
     };
 
-  }, [props.url, getDataFn, url]);
+  }, [props.url, props.error, getDataFn, url]);
 
   useEffect(() => {
     if (data.length === 0 && props.dataFromJson.length !== 0) {
@@ -147,7 +150,6 @@ const DataController = (props) => {
         promptPolygon.push((x + biasX1) + ',' + (y - biasY1) + ' ' + (x + biasX1) + ',' + (y - biasY2) + ' '
           + (x + biasX2) + ',' + (y - biasY2) + ' ' + (x + biasX2) + ',' + (y - biasY1));
       })
-
       // создаем координаты и описание для шакал X и Y
       pointsOfAxisY = 'M ' + (step * 2) + ' ' + nullCoordY + ' l ' + 0 + ' ' + svgHeight;
       pointsOfAxisX = 'M ' + (step * 2) + ' ' + (svgHeight + nullCoordY) + ' l ' + (svgWidth - step * 4) + ' ' + 0;
@@ -173,12 +175,12 @@ const DataController = (props) => {
 
 
       if (MaxY <= 0) {
-
+        zeroAxis = 'none'
       } else if (MinY >= 0) {
-
+        zeroAxis = 'none'
       } else if (MinY <= 0 && MaxY >= 0) {
-        zeroAxis = (step * 2) + ',' + (svgHeight + (MinimumOfAxisY * indexCompresionY)) + ' '
-          + (svgWidth - step * 2) + ',' + (svgHeight + (MinimumOfAxisY * indexCompresionY));
+        zeroAxis = (step * 2) + ',' + ((svgHeight + nullCoordY)+ (MinimumOfAxisY * indexCompresionY)) + ' '
+          + (svgWidth - step * 2) + ',' + ((svgHeight + nullCoordY) + (MinimumOfAxisY * indexCompresionY));
       }
 
       setPoints({
@@ -216,5 +218,6 @@ const DataController = (props) => {
 }
 export default connect(state => ({
   url: state.url,
-  dataFromJson: state.data
+  dataFromJson: state.data,
+  error: state.error
 }), { getData })(DataController)

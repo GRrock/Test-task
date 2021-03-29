@@ -1,8 +1,9 @@
   
-import {DISPATCHURL, GETDATA} from "./const";
+import {DISPATCHURL, GETDATA, ERROR} from "./const";
 const initialState = {
     url: '',
-    data: []
+    data: [],
+    error: false
 };
 
 export function rootReducer(state = initialState, action){
@@ -10,10 +11,15 @@ export function rootReducer(state = initialState, action){
         case DISPATCHURL :
             return {...state,
                 url: action.url,
+                error: action.error
                 };
         case GETDATA :
             return {...state,
-                data: action.data,
+                data: action.data
+                };
+        case ERROR :
+            return {...state,
+                error: action.error,
                 };
         default: return state;
     }
