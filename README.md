@@ -20,11 +20,25 @@ server nodejs - в качестве сервера
 ## Пошаговая инструкция по запуску, от подготовки окружения до визуального отображения в окне браузера;
 
 Склонируйте репозиторий на свой компьютер.
+
 Запустите команду  npm install
+
+Запустите команду  npm install
+
 
 ### Для запуска development mode
 Откройте  bash 
 Перейдите в директорию cd ./test-task/server-nodejs
+
+и запустите команду  node server.js
+
+Откройте второй bash 
+Перейдите в директорию cd ./test-task
+и запустите команду  npm start
+
+Введите в текстовое поли данный url
+ http://static.anychart.com/cdn/anydata/common/11.json
+
 и запустите команду  node server.js
 
 Откройте второй bash 
@@ -37,6 +51,12 @@ server nodejs - в качестве сервера
 ### Для запуска build
 Откройте bash 
 Перейдите в директорию cd ./test-task/server-nodejs
+
+и запустите команду  node server.js
+
+Откройте второй bash 
+Перейдите в директорию cd ./test-task и запустите команду  npm run-script build
+
 и запустите команду  node server.js
 
 Откройте второй bash 
