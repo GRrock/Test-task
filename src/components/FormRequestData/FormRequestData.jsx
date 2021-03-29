@@ -13,7 +13,7 @@ const FormRequestData = (props) => {
   return (
     <div className='container'>
       <form onSubmit={handlerSubmit} className="formRequestData">
-        <input className='urlInput' type='text' value={url} onChange={(event) => { setUrl(event.target.value) }} />
+        <input className='urlInput' placeholder='Введите URL' type='text' value={url} onChange={(event) => { setUrl(event.target.value) }} />
         <button className='submitButton' onClick={handlerSubmit}> Обновить данные </button>
       </form>
     </div>
