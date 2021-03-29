@@ -208,8 +208,7 @@ const DataController = (props) => {
   }, [points])
 
   if (rendering) {
-
-    return <ChartController points={points}/>
+    return <ChartController points={points}/> 
   } else {
     return <div></div>
   }
