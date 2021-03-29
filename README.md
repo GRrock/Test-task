@@ -22,7 +22,12 @@ server nodejs - в качестве сервера
 
 ## Пошаговая инструкция по запуску;
 
-Склонируйте репозиторий на свой компьютер.
+Все команды выполняются в терминале, я использую  bash
+Создайте на своем компьютере папку и спомощью терминала перейдите в директорию
+
+Склонируйте репозиторий на свой компьютер выполнив команду 
+
+git clone https://github.com/GRrock/Test-task.git
 
 Запустите команду  npm install
 
@@ -32,7 +37,7 @@ server nodejs - в качестве сервера
 
 и запустите команду  node server.js
 
-Откройте второй bash 
+Откройте второй  bash 
 Перейдите в директорию cd ./test-task
 и запустите команду  npm start
 
@@ -41,12 +46,12 @@ server nodejs - в качестве сервера
 http://static.anychart.com/cdn/anydata/common/11.json
 
 ### Для запуска build
-Откройте bash 
+Откройте  bash 
 Перейдите в директорию cd ./test-task/server-nodejs
 
 и запустите команду  node server.js
 
-Откройте второй bash 
+Откройте второй  bash 
 Перейдите в директорию cd ./test-task и запустите команду  npm run-script build
 
 Запустите команду serve -s build  (если у вас не установлен пакет serve, запустите sudo npm install -g serve)
