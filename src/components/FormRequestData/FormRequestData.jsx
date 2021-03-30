@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { dispatchURL } from '../../modules/actions'
 
+// Компонент формы
+// После ввода URL в текстовое поле и нажатия кнопки / Enter
+// отправляет данные в глабальный state
+
 const FormRequestData = (props) => {
   const [url, setUrl] = useState('');
   const handlerSubmit = event => {
     event.preventDefault()
-
     props.dispatchURL(url.trim());
   }
 

@@ -22,6 +22,7 @@ const DataController = (props) => {
         getDataFn(url)
       }, 60000)
     }
+    // отключаем цикл запросов, если пришла ошибка или введен новый url
     if(props.error === true){
       clearInterval(interval)
     }
@@ -31,6 +32,8 @@ const DataController = (props) => {
 
   }, [props.url, props.error, getDataFn, url]);
 
+  // проверяем данные, пришедшие с сервера, 
+  //если они отличается от уже хранящихся, вызываем расчеты точек графика и перерисовку
   useEffect(() => {
     if (data.length === 0 && props.dataFromJson.length !== 0) {
       setData(props.dataFromJson);
@@ -39,10 +42,12 @@ const DataController = (props) => {
       setData(props.dataFromJson);
 
     } else if (data.length === props.dataFromJson.length) {
+
       let dataAsObj = data.reduce((acc, elem) => {
         acc[elem.x] = elem.value
         return acc
       }, {});
+
       let dataFromJsonAsObj = props.dataFromJson.reduce((acc, elem) => {
         acc[elem.x] = elem.value
         return acc
@@ -57,7 +62,8 @@ const DataController = (props) => {
     }
     
   }, [props.dataFromJson, data])
-  // подготавливаем данные
+
+  // подготавливаем данные отрисовки
   useEffect(() => {
 
     if (data.length !== 0) {
@@ -102,6 +108,7 @@ const DataController = (props) => {
         axisY.push(elem.value)
       })
 
+      // удаляем лишние эелементы с начала и конца 'start' / 'end'
       axisX.shift();
       axisX.pop();
       axisY.shift();
@@ -109,6 +116,9 @@ const DataController = (props) => {
 
       MaxY = Math.max(...axisY);
       MinY = Math.min(...axisY);
+
+      // делаем клабировку для значений максимума и минимума
+      // чтобы корректно сдвагать график
 
       if (MaxY <= 0) {
         signOfCalibrationMax = 1;
@@ -121,14 +131,19 @@ const DataController = (props) => {
         signOfCalibrationMin = 1;
       }
 
+      // расширяем диапазон значений для красивого отображения на графике
       MaximumOfAxisY = (Math.floor((Math.abs(MaxY) / step)) + signOfCalibrationMin) * step;
-      MinimumOfAxisY = (Math.floor((Math.abs(MinY) / step)) + signOfCalibrationMax) * step; // тут
+      MinimumOfAxisY = (Math.floor((Math.abs(MinY) / step)) + signOfCalibrationMax) * step;
 
+      // возвращаем знак, так как выше считали значение по модулю
       MaximumOfAxisY = (MaxY >= 0) ? MaximumOfAxisY : MaximumOfAxisY * -1;
       MinimumOfAxisY = (MinY >= 0) ? MinimumOfAxisY : MinimumOfAxisY * -1;
 
+      // индекс сжатия по осям
       indexCompresionX = svgWidth / Object.keys(data).length;
       indexCompresionY = svgHeight / (MaximumOfAxisY - MinimumOfAxisY);
+
+      //Расчитываем координаты точек графика, и подсказок.
 
       axisY.forEach((elem, index) => {
         x = ((index) * indexCompresionX) + (step * 3);
@@ -138,22 +153,29 @@ const DataController = (props) => {
 
         } else if (MinY >= 0) {
           y = (svgHeight + nullCoordY) - elem * indexCompresionY;
+
         } else if (MinY <= 0 && MaxY >= 0) {
           y = ((svgHeight + nullCoordY) + (MinimumOfAxisY * indexCompresionY)) - (elem * indexCompresionY);
         }
 
         dots.push([x, y]);
+
         grafik += x + ',' + y + ' ';
-        verticalLines.push(x + ',' + nullCoordY + ' ' + x + ',' + svgHeight)
+
+        verticalLines.push(x + ',' + nullCoordY + ' ' + x + ',' + svgHeight);
+
         verticalPolygon.push((x - step) + ',' + nullCoordY + ' ' + (x - step) + ',' + svgHeight + ' '
           + (x + step) + ',' + svgHeight + ' ' + (x + step) + ',' + nullCoordY);
+
         promptPolygon.push((x + biasX1) + ',' + (y - biasY1) + ' ' + (x + biasX1) + ',' + (y - biasY2) + ' '
           + (x + biasX2) + ',' + (y - biasY2) + ' ' + (x + biasX2) + ',' + (y - biasY1));
       })
+
       // создаем координаты и описание для шакал X и Y
       pointsOfAxisY = 'M ' + (step * 2) + ' ' + nullCoordY + ' l ' + 0 + ' ' + svgHeight;
       pointsOfAxisX = 'M ' + (step * 2) + ' ' + (svgHeight + nullCoordY) + ' l ' + (svgWidth - step * 4) + ' ' + 0;
 
+      // заполняем значения для шкалы Y и точки, так же координаты самой оси и засечки
       let i = 0;
       while (i <= ((MaximumOfAxisY - MinimumOfAxisY)) / step) {
         legendY.push(MinimumOfAxisY + step * i);
@@ -164,6 +186,7 @@ const DataController = (props) => {
         i++;
       }
 
+      // заполняем точки для шкалы X, значения у нас берутся из JSON, так же координаты самой оси и засечки
       i = 0;
       while (i <= Object.keys(data).length - 2) {
         pointsOfAxisX += ' M ' + ((step * 2) + (i * step * 2)) + ' '
@@ -173,6 +196,7 @@ const DataController = (props) => {
         i++;
       }
 
+      // Определяем нулевую ось толкьо в том случае, если есть отрицательные и положительные значения
 
       if (MaxY <= 0) {
         zeroAxis = 'none'
@@ -183,6 +207,7 @@ const DataController = (props) => {
           + (svgWidth - step * 2) + ',' + ((svgHeight + nullCoordY) + (MinimumOfAxisY * indexCompresionY));
       }
 
+      // заполняем объект с точками и значениями
       setPoints({
         pointsOfgrafik: grafik,
         dots: dots,
@@ -202,6 +227,10 @@ const DataController = (props) => {
       });
     }
   }, [data])
+
+  // Хук проверяет обновление точек, 
+  // если объект отличатеся от предыдущего,
+  // делает рендер компонента ChartController.
 
   useEffect(() => {
     setRendering(true)
