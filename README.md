@@ -70,11 +70,11 @@ cd ./test-task
 
 Запустите команду.
 
-npm run-script build
+npm run build
 
 Запустите команду.
 
-npm run-script launch-build
+npm run launch-build
 
 Откройте http://localhost:5000 введите в текстовое поли данный url.
 
