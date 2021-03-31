@@ -162,10 +162,10 @@ const DataController = (props) => {
 
         grafik += x + ',' + y + ' ';
 
-        verticalLines.push(x + ',' + nullCoordY + ' ' + x + ',' + svgHeight);
+        verticalLines.push(x + ',' + nullCoordY + ' ' + x + ',' + (svgHeight + nullCoordY));
 
-        verticalPolygon.push((x - step) + ',' + nullCoordY + ' ' + (x - step) + ',' + svgHeight + ' '
-          + (x + step) + ',' + svgHeight + ' ' + (x + step) + ',' + nullCoordY);
+        verticalPolygon.push((x - step) + ',' + nullCoordY + ' ' + (x - step) + ',' + (svgHeight + nullCoordY) + ' '
+          + (x + step) + ',' + (svgHeight + nullCoordY) + ' ' + (x + step) + ',' + nullCoordY);
 
         promptPolygon.push((x + biasX1) + ',' + (y - biasY1) + ' ' + (x + biasX1) + ',' + (y - biasY2) + ' '
           + (x + biasX2) + ',' + (y - biasY2) + ' ' + (x + biasX2) + ',' + (y - biasY1));
