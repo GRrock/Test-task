@@ -43,7 +43,7 @@ code {
   color: white;
 }
 .group > * {
-  opacity: 0%;
+  opacity: 0;
 }
 .dots {
   fill:black;
@@ -62,8 +62,8 @@ code {
 fill:white;
 }
 
-.group:hover *:not(.verticalPolygon){
-  opacity: 80%;
+.group:hover > *:not(.verticalPolygon){
+  opacity: 80;
 }
 
 .zeroAxis {

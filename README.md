@@ -74,7 +74,7 @@ npm run-script build
 
 Запустите команду.
 
-serve -s build  (если у вас не установлен пакет serve, запустите sudo npm install -g serve)
+npm run-script launch-build
 
 Откройте http://localhost:5000 введите в текстовое поли данный url.
 
